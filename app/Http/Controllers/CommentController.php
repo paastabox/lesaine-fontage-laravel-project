@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 
@@ -12,15 +13,16 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::query()->get();
+        return response()->json($comments);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $comment = Comment::query()->create($request->validated());
     }
 
     /**
@@ -40,9 +42,10 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CommentRequest $request, string $id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->update($request->validated());
     }
 
     /**
@@ -50,6 +53,7 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
     }
 }

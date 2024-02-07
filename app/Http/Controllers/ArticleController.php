@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Models\Article;
 
@@ -12,15 +13,16 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::query()->get();
+        return response()->json($articles);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        //
+        $article = Article::query()->create($request->validated());
     }
 
     /**
@@ -40,9 +42,10 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ArticleRequest $request, string $id)
     {
-        //
+        $article = Article::find($id);
+        $article->update($request->validated());
     }
 
     /**
@@ -50,6 +53,7 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
     }
 }
