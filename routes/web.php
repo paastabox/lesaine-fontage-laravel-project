@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +16,3 @@ use App\Http\Controllers\CommentController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/article/{id}', [ArticleController::class, 'show']);
-
-Route::get('/comment/{id}', [CommentController::class, 'show']);

@@ -12,7 +12,16 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::all();
+        $response = [];
+        foreach ($articles as $article) {
+            $response[] = [
+                'id' => $article->id,
+                'title' => $article->title,
+                'image_url' => $article->image_url,
+            ];
+        }
+        return response()->json($response);
     }
 
     /**
