@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
-use Illuminate\Http\Request;
 use App\Models\Comment;
 
 class CommentController extends Controller
@@ -30,7 +29,7 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        $comment = Comment::find($id);
+        $comment = Comment::query()->find($id);
         return response()->json([
             'id' => $comment->id,
             'article_id' => $comment->article_id,
@@ -44,7 +43,7 @@ class CommentController extends Controller
      */
     public function update(CommentRequest $request, string $id)
     {
-        $comment = Comment::find($id);
+        $comment = Comment::query()->find($id);
         $comment->update($request->validated());
     }
 
@@ -53,7 +52,7 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        $comment = Comment::find($id);
+        $comment = Comment::query()->find($id);
         $comment->delete();
     }
 }

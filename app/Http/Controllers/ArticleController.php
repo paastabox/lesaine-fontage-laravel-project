@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
-use Illuminate\Http\Request;
 use App\Models\Article;
 
 class ArticleController extends Controller
@@ -30,7 +29,7 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        $article = Article::find($id);
+        $article = Article::query()->find($id);
         return response()->json([
             'id' => $article->id,
             'title' => $article->title,
@@ -44,7 +43,7 @@ class ArticleController extends Controller
      */
     public function update(ArticleRequest $request, string $id)
     {
-        $article = Article::find($id);
+        $article = Article::query()->find($id);
         $article->update($request->validated());
     }
 
@@ -53,7 +52,20 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        $article = Article::find($id);
+        $article = Article::query()->find($id);
         $article->delete();
+    }
+
+    public function search(string $search)
+    {
+        $articles = Article::query()
+            ->where('title', 'like', "%$search%")
+            ->get();
+    }
+
+    public function comments(string $id)
+    {
+        $comments = Article::query()->find($id)->comments;
+        return response()->json($comments);
     }
 }
