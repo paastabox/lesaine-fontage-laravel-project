@@ -12,7 +12,14 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::query()->get();
+        foreach (Comment::query()->get() as $comment) {
+            $comments[] = [
+                'id' => $comment->id,
+                'article_id' => $comment->article_id,
+                'author' => $comment->author,
+                'content' => $comment->content,
+            ];
+        }
         return response()->json($comments);
     }
 

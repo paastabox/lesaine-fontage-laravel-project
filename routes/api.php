@@ -29,7 +29,7 @@ Route::delete('/articles/{article}', [ArticleController::class, 'destroy']);
 Route::get('/articles/{article}/comments', [ArticleController::class, 'comments']);
 
 Route::get('/comments', [CommentController::class, 'index']);
-Route::post('/comment', [CommentController::class, 'store']);
-Route::get('/comment/{comment}', [CommentController::class, 'show']);
-Route::patch('/comment/{comment}', [CommentController::class, 'update']);
-Route::delete('/comment/{comment}', [CommentController::class, 'destroy']);
+Route::post('/comments', [CommentController::class, 'store']);
+Route::get('/comments/{comment}', [CommentController::class, 'show']);
+Route::patch('/comments/{comment}', [CommentController::class, 'update']);
+Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);

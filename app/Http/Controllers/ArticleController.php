@@ -12,7 +12,14 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::query()->get();
+        foreach (Article::query()->get() as $article) {
+            $articles[] = [
+                'id' => $article->id,
+                'title' => $article->title,
+                'image_url' => $article->image_url,
+                'content' => $article->content,
+            ];
+        }
         return response()->json($articles);
     }
 
@@ -61,11 +68,25 @@ class ArticleController extends Controller
         $articles = Article::query()
             ->where('title', 'like', "%$search%")
             ->get();
+        foreach ($articles as $article) {
+            $articlesList[] = [
+                'id' => $article->id,
+                'title' => $article->title,
+                'image_url' => $article->image_url,
+                'content' => $article->content,
+            ];
+        }
+        return response()->json($articlesList);
     }
 
     public function comments(string $id)
     {
         $comments = Article::query()->find($id)->comments;
-        return response()->json($comments);
+        return response()->json([
+            'id' => $comments->id,
+            'article_id' => $comments->article_id,
+            'author' => $comments->author,
+            'content' => $comments->content,
+        ]);
     }
 }
