@@ -19,6 +19,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/article/{id}', [ArticleController::class, 'show']);
-
-Route::get('/comment/{id}', [CommentController::class, 'show']);

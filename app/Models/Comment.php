@@ -10,6 +10,12 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'article_id',
+        'author',
+        'content',
+    ];
+
     // One to one relation
     public function article(): HasOne
     {
