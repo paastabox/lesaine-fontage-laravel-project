@@ -20,7 +20,7 @@ class CommentFactory extends Factory
         return [
             'article_id' => Article::factory(),
             'author' => $this->faker->name(),
-            'content' => $this->faker->text(350)
+            'content' => $this->faker->text(50)
         ];
     }
 }
