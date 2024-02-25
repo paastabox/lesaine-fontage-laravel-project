@@ -1,0 +1,5 @@
+fonctionnalités laravel :
+- soft delete : colonne deleted at.
+- scope
+- event listener (envoi de mail par exemple)
+- authentification sanctum
